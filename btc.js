@@ -2,7 +2,7 @@ var http = require('http');
 var fs = require('fs');
 var request = require('request');
 
-var tg = JSON.parse(fs.readFileSync('telegram.json', 'utf8'));
+var tg = JSON.parse(fs.readFileSync(__dirname + '/telegram.json', 'utf8'));
 
 console.log("Bot token: " + tg.token);
 console.log("Chat/Channel: " + tg.chat + "\n");
