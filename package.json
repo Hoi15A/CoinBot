@@ -4,7 +4,7 @@
   "description": "Get BTC (and ETH) and post to TG chat",
   "main": "btc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node btc.js"
   },
   "author": "Austin Albrecht",
   "license": "GPL-3.0"
