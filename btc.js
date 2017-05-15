@@ -1,5 +1,6 @@
 var http = require('http');
 var fs = require('fs');
+var request = require('request');
 
 var tg = JSON.parse(fs.readFileSync('telegram.json', 'utf8'));
 
@@ -22,7 +23,7 @@ function getCurrentBTC(callback) {
 
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
-            callback(parsed.CHF);
+            callback(parsed.CHF.buy.toFixed(2));
         });
 
     });
@@ -45,16 +46,36 @@ function getCurrentETH(callback) {
 
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
-            callback(parsed.price.chf);
+            callback(parsed.price.chf.toFixed(2));
         });
 
     });
 
 }
 
+function sendToTelegram(message) {
+  var url = "https://api.telegram.org/bot" + tg.token + "/sendMessage"
+  request.post(
+    url,
+    { json: {
+      chat_id: tg.chat,
+      text: message,
+      parse_mode: "Markdown",
+      disable_web_page_preview: true
+    } },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body)
+        }
+    }
+);
+
+}
+
 getCurrentBTC(function(chf) {
-  console.log(chf);
-});
-getCurrentETH(function(eth) {
-  console.log(eth);
+  var msg = "`1` *Bitcoin* is worth `" + chf + "` *CHF*\n";
+  getCurrentETH(function(chf) {
+    msg += "`1` *Ethereum* is worth `" + chf + "` *CHF* ";
+    sendToTelegram(msg);
+  });
 });

@@ -7,5 +7,8 @@
     "start": "node btc.js"
   },
   "author": "Austin Albrecht",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
 }
