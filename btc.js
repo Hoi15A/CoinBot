@@ -1,9 +1,12 @@
 var http = require('http');
+var fs = require('fs');
 
+var tg = JSON.parse(fs.readFileSync('telegram.json', 'utf8'));
 
+console.log("Bot token: " + tg.token);
+console.log("Chat/Channel: " + tg.chat + "\n");
 
 function getCurrentBTC(callback) {
-  //https://blockchain.info/en/ticker
 
   return http.get({
         host: 'blockchain.info',
@@ -27,8 +30,7 @@ function getCurrentBTC(callback) {
 }
 
 function getCurrentETH(callback) {
-  //https://coinmarketcap-nexuist.rhcloud.com/api/eth
-  
+
   return http.get({
         host: 'coinmarketcap-nexuist.rhcloud.com',
         path: '/api/eth'
