@@ -1,4 +1,6 @@
 {
   "token": "11223344:AABBCCDDEEFFGGHHIIJJ",
-  "chat": "chat_id or @channelName"
+  "chat": "chat_id or @channelName",
+  "crypto": ["BTC", "XMR", "ETH"],
+  "currency": "CHF"
 }
